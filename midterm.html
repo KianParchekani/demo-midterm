@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kian Parchekani">
+<meta name="dcterms.date" content="2023-02-28">
+
+<title>Midterm Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="midterm_files/libs/clipboard/clipboard.min.js"></script>
+<script src="midterm_files/libs/quarto-html/quarto.js"></script>
+<script src="midterm_files/libs/quarto-html/popper.min.js"></script>
+<script src="midterm_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="midterm_files/libs/quarto-html/anchor.min.js"></script>
+<link href="midterm_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="midterm_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="midterm_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="midterm_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="midterm_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Midterm Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kian Parchekani </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 28, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="importing-modules" class="level4">
+<h4 class="anchored" data-anchor-id="importing-modules">Importing Modules</h4>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> ttest_ind</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nyc <span class="op">=</span> pd.read_csv(<span class="st">'nyc311_011523-012123_by022023.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="problem-1" class="level1">
+<h1>Problem 1</h1>
+<section id="to-start-off-we-have-to-clean-the-data-a-bit." class="level4">
+<h4 class="anchored" data-anchor-id="to-start-off-we-have-to-clean-the-data-a-bit.">To start off, we have to clean the data a bit.</h4>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(nyc[<span class="st">'Created Date'</span>])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Closed Date'</span>] <span class="op">=</span> pd.to_datetime(nyc[<span class="st">'Closed Date'</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># find rows where Created Date is later than Closed Date</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> nyc[<span class="st">'Created Date'</span>] <span class="op">&gt;</span> nyc[<span class="st">'Closed Date'</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># replace values in those rows by swapping the two dates</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>nyc.loc[mask, [<span class="st">'Created Date'</span>, <span class="st">'Closed Date'</span>]] <span class="op">=</span> nyc.loc[mask, [<span class="st">'Closed Date'</span>, <span class="st">'Created Date'</span>]]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># convert all values in the Location Type column to lowercase</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Location Type'</span>] <span class="op">=</span> nyc[<span class="st">'Location Type'</span>].<span class="bu">str</span>.lower()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># define the bounds of NYC</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>nyc_lat_bounds <span class="op">=</span> (<span class="fl">40.4774</span>, <span class="fl">40.9176</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>nyc_lon_bounds <span class="op">=</span> (<span class="op">-</span><span class="fl">74.2591</span>, <span class="op">-</span><span class="fl">73.7002</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># create a mask to identify rows where latitude or longitude is outside NYC bounds</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> (nyc[<span class="st">'Latitude'</span>] <span class="op">&lt;</span> nyc_lat_bounds[<span class="dv">0</span>]) <span class="op">|</span> (nyc[<span class="st">'Latitude'</span>] <span class="op">&gt;</span> nyc_lat_bounds[<span class="dv">1</span>]) <span class="op">|</span> <span class="op">\</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>       (nyc[<span class="st">'Longitude'</span>] <span class="op">&lt;</span> nyc_lon_bounds[<span class="dv">0</span>]) <span class="op">|</span> (nyc[<span class="st">'Longitude'</span>] <span class="op">&gt;</span> nyc_lon_bounds[<span class="dv">1</span>])</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># drop the rows that are outside the NYC bounds</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>nyc <span class="op">=</span> nyc[<span class="op">~</span>mask]</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># format the Incident Zip column to be 5 digits long</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Incident Zip'</span>] <span class="op">=</span> nyc[<span class="st">'Incident Zip'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Incident Zip'</span>] <span class="op">=</span> nyc[<span class="st">'Incident Zip'</span>].<span class="bu">str</span>[:<span class="dv">5</span>]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>nyc.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Unique Key</th>
+      <th>Created Date</th>
+      <th>Closed Date</th>
+      <th>Agency</th>
+      <th>Agency Name</th>
+      <th>Complaint Type</th>
+      <th>Descriptor</th>
+      <th>Location Type</th>
+      <th>Incident Zip</th>
+      <th>Incident Address</th>
+      <th>...</th>
+      <th>Vehicle Type</th>
+      <th>Taxi Company Borough</th>
+      <th>Taxi Pick Up Location</th>
+      <th>Bridge Highway Name</th>
+      <th>Bridge Highway Direction</th>
+      <th>Road Ramp</th>
+      <th>Bridge Highway Segment</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>56532399</td>
+      <td>2023-01-15 00:00:00</td>
+      <td>2023-01-17 00:00:01</td>
+      <td>DOHMH</td>
+      <td>Department of Health and Mental Hygiene</td>
+      <td>Food Poisoning</td>
+      <td>1 or 2</td>
+      <td>restaurant/bar/deli/bakery</td>
+      <td>11101</td>
+      <td>28-07 JACKSON AVENUE</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.748433</td>
+      <td>-73.938768</td>
+      <td>(40.74843329250923, -73.93876844606294)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>56533302</td>
+      <td>2023-01-15 00:00:00</td>
+      <td>2023-01-23 00:00:01</td>
+      <td>DOHMH</td>
+      <td>Department of Health and Mental Hygiene</td>
+      <td>Food Poisoning</td>
+      <td>1 or 2</td>
+      <td>other (explain below)</td>
+      <td>11101</td>
+      <td>48-18 NORTHERN BOULEVARD</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.753619</td>
+      <td>-73.914245</td>
+      <td>(40.75361894380833, -73.91424532268624)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>56533451</td>
+      <td>2023-01-15 00:00:00</td>
+      <td>2023-01-17 09:34:08</td>
+      <td>DOHMH</td>
+      <td>Department of Health and Mental Hygiene</td>
+      <td>Food Poisoning</td>
+      <td>1 or 2</td>
+      <td>food cart vendor</td>
+      <td>10305</td>
+      <td>1941 HYLAN BOULEVARD</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.582218</td>
+      <td>-74.097217</td>
+      <td>(40.58221767593629, -74.09721689751461)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>56536021</td>
+      <td>2023-01-15 00:00:00</td>
+      <td>2023-01-17 09:48:19</td>
+      <td>DOHMH</td>
+      <td>Department of Health and Mental Hygiene</td>
+      <td>Food Poisoning</td>
+      <td>1 or 2</td>
+      <td>restaurant/bar/deli/bakery</td>
+      <td>11103</td>
+      <td>24-11 STEINWAY STREET</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.768674</td>
+      <td>-73.911074</td>
+      <td>(40.76867420855789, -73.91107425623979)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>56538004</td>
+      <td>2023-01-15 00:00:00</td>
+      <td>2023-01-23 15:08:02</td>
+      <td>DOHMH</td>
+      <td>Department of Health and Mental Hygiene</td>
+      <td>Food Poisoning</td>
+      <td>3 or More</td>
+      <td>other (explain below)</td>
+      <td>10036</td>
+      <td>700 8 AVENUE</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.758662</td>
+      <td>-73.988738</td>
+      <td>(40.75866221848322, -73.98873795996684)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>56524984</td>
+      <td>2023-01-15 00:00:18</td>
+      <td>2023-01-15 02:37:30</td>
+      <td>NYPD</td>
+      <td>New York City Police Department</td>
+      <td>Noise - Residential</td>
+      <td>Banging/Pounding</td>
+      <td>residential building/house</td>
+      <td>10467</td>
+      <td>2504 BRONX PARK EAST</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.863611</td>
+      <td>-73.870409</td>
+      <td>(40.8636112787934, -73.87040864262848)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>56526790</td>
+      <td>2023-01-15 00:00:21</td>
+      <td>2023-01-15 01:54:24</td>
+      <td>NYPD</td>
+      <td>New York City Police Department</td>
+      <td>Noise - Street/Sidewalk</td>
+      <td>Loud Music/Party</td>
+      <td>street/sidewalk</td>
+      <td>11418</td>
+      <td>113-22 BESSEMER STREET</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.702772</td>
+      <td>-73.837580</td>
+      <td>(40.70277200816068, -73.83758019372564)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>56525034</td>
+      <td>2023-01-15 00:00:50</td>
+      <td>2023-01-15 01:09:56</td>
+      <td>NYPD</td>
+      <td>New York City Police Department</td>
+      <td>Illegal Parking</td>
+      <td>Posted Parking Sign Violation</td>
+      <td>street/sidewalk</td>
+      <td>11217</td>
+      <td>50 NEVINS STREET</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.687196</td>
+      <td>-73.981921</td>
+      <td>(40.68719608843765, -73.98192072171082)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>56526234</td>
+      <td>2023-01-15 00:01:02</td>
+      <td>2023-01-15 05:47:41</td>
+      <td>NYPD</td>
+      <td>New York City Police Department</td>
+      <td>Noise - Residential</td>
+      <td>Loud Music/Party</td>
+      <td>residential building/house</td>
+      <td>10472</td>
+      <td>1988 NEWBOLD AVENUE</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.832358</td>
+      <td>-73.858906</td>
+      <td>(40.83235751279932, -73.85890589915455)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>56530817</td>
+      <td>2023-01-15 00:01:07</td>
+      <td>2023-01-15 01:01:26</td>
+      <td>NYPD</td>
+      <td>New York City Police Department</td>
+      <td>Noise - Residential</td>
+      <td>Banging/Pounding</td>
+      <td>residential building/house</td>
+      <td>10028</td>
+      <td>522 EAST   83 STREET</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>40.773667</td>
+      <td>-73.947833</td>
+      <td>(40.773667438961155, -73.94783272698673)</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 41 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="this-may-not-be-clean-enough-but-a-lot-of-geocoding-i-was-unable-to-get-to-run-correctly-without-ruining-some-of-my-other-code-so-this-is-all-i-included." class="level4">
+<h4 class="anchored" data-anchor-id="this-may-not-be-clean-enough-but-a-lot-of-geocoding-i-was-unable-to-get-to-run-correctly-without-ruining-some-of-my-other-code-so-this-is-all-i-included.">This may not be clean enough, but a lot of geocoding I was unable to get to run correctly without ruining some of my other code, so this is all I included.</h4>
+</section>
+<section id="if-i-had-the-ability-to-do-so-i-would-go-back-and-remove-entries-without-valid-zip-codes-but-i-felt-that-the-latitude-and-longitude-bounds-should-do-the-trick-geocoding-is-not-my-forte-as-displayed-by-my-homeworks" class="level4">
+<h4 class="anchored" data-anchor-id="if-i-had-the-ability-to-do-so-i-would-go-back-and-remove-entries-without-valid-zip-codes-but-i-felt-that-the-latitude-and-longitude-bounds-should-do-the-trick-geocoding-is-not-my-forte-as-displayed-by-my-homeworks">If I had the ability to do so, I would go back and remove entries without valid zip codes, but I felt that the latitude and longitude bounds should do the trick (geocoding is not my forte, as displayed by my homeworks)</h4>
+</section>
+</section>
+<section id="problem-2" class="level1">
+<h1>Problem 2</h1>
+<section id="we-begin-by-filtering-the-data-to-only-nyc-requests" class="level4">
+<h4 class="anchored" data-anchor-id="we-begin-by-filtering-the-data-to-only-nyc-requests">We begin by filtering the data to only NYC requests</h4>
+</section>
+<section id="then-we-create-the-duration-varaible-along-with-the-weekend-variable" class="level4">
+<h4 class="anchored" data-anchor-id="then-we-create-the-duration-varaible-along-with-the-weekend-variable">Then we create the duration varaible, along with the Weekend variable</h4>
+</section>
+<section id="now-lets-plot-this." class="level4">
+<h4 class="anchored" data-anchor-id="now-lets-plot-this.">Now, let’s plot this.</h4>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nyc <span class="op">=</span> nyc[nyc[<span class="st">'Agency'</span>] <span class="op">==</span> <span class="st">'NYPD'</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new variable "Duration", which represents the time period from the "Created Date" to "Closed Date"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Duration'</span>] <span class="op">=</span> (nyc[<span class="st">'Closed Date'</span>] <span class="op">-</span> nyc[<span class="st">'Created Date'</span>]).dt.total_seconds() <span class="op">/</span> <span class="dv">60</span>  <span class="co"># in minutes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize the distribution of "Duration" by weekdays/weekend and by "Borough"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Weekday'</span>] <span class="op">=</span> nyc[<span class="st">'Created Date'</span>].dt.day_name()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Weekend'</span>] <span class="op">=</span> np.where(nyc[<span class="st">'Weekday'</span>].isin([<span class="st">'Saturday'</span>, <span class="st">'Sunday'</span>]), <span class="st">'Weekend'</span>, <span class="st">'Weekday'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'Weekend'</span>, y<span class="op">=</span><span class="st">'Duration'</span>, data<span class="op">=</span>nyc)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Duration by Weekdays/Weekend'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Day'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'Borough'</span>, y<span class="op">=</span><span class="st">'Duration'</span>, data<span class="op">=</span>nyc)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Duration by Borough'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-4-output-1.png" width="602" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-4-output-2.png" width="602" height="533"></p>
+</div>
+</div>
+</section>
+<section id="now-we-run-a-hypothesis-test-to-see-whether-there-is-a-significant-difference-in-duration-for-complaints-filed-over-the-weekend-vs.-during-the-week." class="level4">
+<h4 class="anchored" data-anchor-id="now-we-run-a-hypothesis-test-to-see-whether-there-is-a-significant-difference-in-duration-for-complaints-filed-over-the-weekend-vs.-during-the-week.">Now we run a hypothesis test to see whether there is a significant difference in duration for complaints filed over the weekend vs.&nbsp;during the week.</h4>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Null hypothesis (for each borough): There is no difference in duration for the weekend'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Alt. Hypothesis: There is some difference in duration for the weekend'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>weekday_dur <span class="op">=</span> nyc[nyc[<span class="st">'Weekend'</span>] <span class="op">==</span> <span class="st">'Weekday'</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>weekend_dur <span class="op">=</span> nyc[nyc[<span class="st">'Weekend'</span>] <span class="op">==</span> <span class="st">'Weekend'</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> borough <span class="kw">in</span> nyc[<span class="st">'Borough'</span>].unique():</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    borough_weekday_dur <span class="op">=</span> weekday_dur[weekday_dur[<span class="st">'Borough'</span>] <span class="op">==</span> borough][<span class="st">'Duration'</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    borough_weekend_dur <span class="op">=</span> weekend_dur[weekend_dur[<span class="st">'Borough'</span>] <span class="op">==</span> borough][<span class="st">'Duration'</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Duration distribution for </span><span class="sc">{</span>borough<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\t</span><span class="ss">Weekday mean: </span><span class="sc">{</span>np<span class="sc">.</span>mean(borough_weekday_dur)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\t</span><span class="ss">Weekend mean: </span><span class="sc">{</span>np<span class="sc">.</span>mean(borough_weekend_dur)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    t_stat, p_val <span class="op">=</span> ttest_ind(borough_weekday_dur.dropna(), borough_weekend_dur.dropna())</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\t</span><span class="ss">T-statistic: </span><span class="sc">{</span>t_stat<span class="sc">:.2f}</span><span class="ss">, p-value: </span><span class="sc">{</span>p_val<span class="sc">:.4f}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'According to our results, the p-values indicate that we reject the null hypothesis for Queens, Staten Island and Manhattan, but we fail to reject for Brooklyn and the Bronx, based on our evidence'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Null hypothesis (for each borough): There is no difference in duration for the weekend
+Alt. Hypothesis: There is some difference in duration for the weekend
+Duration distribution for BRONX:
+    Weekday mean: 180.09
+    Weekend mean: 169.62
+    T-statistic: 1.43, p-value: 0.1516
+
+Duration distribution for QUEENS:
+    Weekday mean: 120.59
+    Weekend mean: 137.71
+    T-statistic: -4.27, p-value: 0.0000
+
+Duration distribution for BROOKLYN:
+    Weekday mean: 80.27
+    Weekend mean: 78.54
+    T-statistic: 0.79, p-value: 0.4322
+
+Duration distribution for MANHATTAN:
+    Weekday mean: 66.18
+    Weekend mean: 58.53
+    T-statistic: 2.75, p-value: 0.0059
+
+Duration distribution for STATEN ISLAND:
+    Weekday mean: 76.07
+    Weekend mean: 60.25
+    T-statistic: 2.49, p-value: 0.0131
+
+Duration distribution for Unspecified:
+    Weekday mean: 121.94
+    Weekend mean: nan
+    T-statistic: nan, p-value: nan
+
+According to our results, the p-values indicate that we reject the null hypothesis for Queens, Staten Island and Manhattan, but we fail to reject for Brooklyn and the Bronx, based on our evidence</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="problem-3" class="level1">
+<h1>Problem 3</h1>
+<section id="first-we-create-the-over3h-variable." class="level4">
+<h4 class="anchored" data-anchor-id="first-we-create-the-over3h-variable.">First, we create the over3h variable.</h4>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Define over3h</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'over3h'</span>] <span class="op">=</span> (nyc[<span class="st">'Duration'</span>] <span class="op">&gt;</span> <span class="dv">180</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#nyc['over3h']</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="now-we-import-useful-modules" class="level4">
+<h4 class="anchored" data-anchor-id="now-we-import-useful-modules">Now, we import useful modules</h4>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder, StandardScaler</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="model-1" class="level1">
+<h1>Model 1</h1>
+<section id="my-first-model-was-a-basic-svm-one-using-parameters-i-saw-fit-to-use.-however-as-i-have-found-in-the-past-what-i-believe-to-be-useful-parameters-are-often-categorical-so-i-have-to-do-my-best-to-account-for-this." class="level4">
+<h4 class="anchored" data-anchor-id="my-first-model-was-a-basic-svm-one-using-parameters-i-saw-fit-to-use.-however-as-i-have-found-in-the-past-what-i-believe-to-be-useful-parameters-are-often-categorical-so-i-have-to-do-my-best-to-account-for-this.">My first model was a basic SVM one, using parameters I saw fit to use. However, as I have found in the past, what I believe to be useful parameters are often categorical, so I have to do my best to account for this.</h4>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the columns of interest</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> nyc[[<span class="st">"Location Type"</span>, <span class="st">"Complaint Type"</span>, <span class="st">"Weekend"</span>,<span class="st">"Borough"</span>]]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> nyc[<span class="st">"over3h"</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Encode categorical features as numerical values</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>X[<span class="st">"Complaint Type"</span>] <span class="op">=</span> le.fit_transform(X[<span class="st">"Complaint Type"</span>])</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>X[<span class="st">"Location Type"</span>] <span class="op">=</span> le.fit_transform(X[<span class="st">"Location Type"</span>])</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>X[<span class="st">"Weekend"</span>] <span class="op">=</span> le.fit_transform(X[<span class="st">"Weekend"</span>])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>X[<span class="st">"Borough"</span>] <span class="op">=</span> le.fit_transform(X[<span class="st">"Borough"</span>])</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and testing sets</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the features</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the SVM model</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>svm <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>svm.fit(X_train, y_train)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the test set labels</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> svm.predict(X_test)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the performance of the SVM model</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>accuracy_score(y_test, y_pred)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the AUC score</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>auc_score <span class="op">=</span> roc_auc_score(y_test, y_pred)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC Score: </span><span class="sc">{</span>auc_score<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/1764801877.py:7: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/1764801877.py:9: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/1764801877.py:11: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/1764801877.py:13: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.833991177153471
+              precision    recall  f1-score   support
+
+           0       0.83      1.00      0.91      3592
+           1       0.00      0.00      0.00       715
+
+    accuracy                           0.83      4307
+   macro avg       0.42      0.50      0.45      4307
+weighted avg       0.70      0.83      0.76      4307
+
+AUC Score: 0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="model-2" class="level1">
+<h1>Model 2</h1>
+<section id="this-model-was-done-a-bit-differently.-i-utilized-help-from-stackoverlfow-my-roomates-and-the-answers-to-previous-homeworks-to-see-if-i-could-get-a-better-svm-model." class="level4">
+<h4 class="anchored" data-anchor-id="this-model-was-done-a-bit-differently.-i-utilized-help-from-stackoverlfow-my-roomates-and-the-answers-to-previous-homeworks-to-see-if-i-could-get-a-better-svm-model.">This model was done a bit differently. I utilized help from StackOverlfow, my roomates, and the answers to previous homeworks to see if I could get a better SVM model.</h4>
+</section>
+<section id="i-have-some-commented-out-code-below-this-that-shows-my-attempts-to-use-a-grid-search-to-optimize-my-model-but-i-still-cannot-get-them-to-work-efficiently-as-they-run-forever-no-matter-how-small-of-a-sample-size-i-give." class="level4">
+<h4 class="anchored" data-anchor-id="i-have-some-commented-out-code-below-this-that-shows-my-attempts-to-use-a-grid-search-to-optimize-my-model-but-i-still-cannot-get-them-to-work-efficiently-as-they-run-forever-no-matter-how-small-of-a-sample-size-i-give.">I have some commented out code below this that shows my attempts to use a Grid Search to optimize my model, but I still cannot get them to work efficiently, as they run forever no matter how small of a sample size I give.</h4>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Date String'</span>] <span class="op">=</span> nyc[<span class="st">'Created Date'</span>].dt.strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S'</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># test data is the week of Jan. 22</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> nyc[nyc[<span class="st">"Date String"</span>].<span class="bu">str</span>.contains(<span class="st">'01/22/2023|01/23/2023|01/24/2023|01/25/2023|01/26/2023|01/27/2023|01/28/2023'</span>)]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># training data is everything else</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># test data is a random sample of 200 incidents</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>test_svm <span class="op">=</span> nyc.sample(n<span class="op">=</span><span class="dv">200</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># training data is a random sample of 800 incidents</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>train_svm <span class="op">=</span> nyc.drop(test.index).sample(n<span class="op">=</span><span class="dv">800</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># select the parameters to be included in the fit </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>train_focus_data_svm <span class="op">=</span> train_svm[[<span class="st">'Complaint Type'</span>, <span class="st">'Location Type'</span>, <span class="st">'over3h'</span>]]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># transform categorical data</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>train_focus_data_svm[<span class="st">"Complaint Type"</span>] <span class="op">=</span> le.fit_transform(train_focus_data_svm[<span class="st">"Complaint Type"</span>])</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>train_focus_data_svm[<span class="st">"Location Type"</span>] <span class="op">=</span> le.fit_transform(train_focus_data_svm[<span class="st">"Location Type"</span>])</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># drop NaN rows </span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>training_svm <span class="op">=</span> train_focus_data_svm.dropna()</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># select the parameters to be included in the testing</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>test_focus_data_svm <span class="op">=</span> test_svm[[<span class="st">'Complaint Type'</span>, <span class="st">'Location Type'</span>, <span class="st">'over3h'</span>]]</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>test_focus_data_svm[<span class="st">"Complaint Type"</span>] <span class="op">=</span> le.fit_transform(test_focus_data_svm[<span class="st">"Complaint Type"</span>])</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>test_focus_data_svm[<span class="st">"Location Type"</span>] <span class="op">=</span> le.fit_transform(test_focus_data_svm[<span class="st">"Location Type"</span>])</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>testing_svm <span class="op">=</span> test_focus_data_svm.dropna()</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># y training and testing</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>y_train_svm <span class="op">=</span> training_svm[<span class="st">'over3h'</span>].values</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>y_test_svm <span class="op">=</span> testing_svm[<span class="st">'over3h'</span>].values</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co"># X training and testing</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>X_train_svm <span class="op">=</span> training_svm.drop(labels<span class="op">=</span>[<span class="st">'over3h'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>X_test_svm <span class="op">=</span> testing_svm.drop(labels<span class="op">=</span>[<span class="st">'over3h'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the features</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>X_train_svm <span class="op">=</span> scaler.fit_transform(X_train_svm)</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>X_test_svm <span class="op">=</span> scaler.transform(X_test_svm)</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the SVM model</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>svm <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>)</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>svm.fit(X_train_svm, y_train_svm)</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the test set labels</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> svm.predict(X_test_svm)</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the performance of the SVM model</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>accuracy_score(y_test_svm, y_pred)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test_svm, y_pred))</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the AUC score</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>auc_score <span class="op">=</span> roc_auc_score(y_test_svm, y_pred)</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC Score: </span><span class="sc">{</span>auc_score<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.825
+              precision    recall  f1-score   support
+
+           0       0.82      1.00      0.90       165
+           1       0.00      0.00      0.00        35
+
+    accuracy                           0.82       200
+   macro avg       0.41      0.50      0.45       200
+weighted avg       0.68      0.82      0.75       200
+
+AUC Score: 0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/3960943931.py:17: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/3960943931.py:19: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/3960943931.py:27: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/var/folders/3p/5_gsc28s6p92k5scwt4lkpvr0000gn/T/ipykernel_9955/3960943931.py:29: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.preprocessing import LabelEncoder</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.model_selection import GridSearchCV</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># # Sample 10 (or smaller if it doesn't run)% of the data for grid search</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># nyc_sample = nyc.sample(frac=0.01, random_state=42)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># # Convert categorical columns to numeric using LabelEncoder</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># le = LabelEncoder()</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># for col in nyc_sample.select_dtypes(include=['object']):</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     nyc_sample[col] = le.fit_transform(nyc_sample[col].astype(str))</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # Split data into X and y</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># X = nyc_sample.drop(['over3h', 'Created Date', 'Closed Date', 'Duration'], axis=1)</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># y = nyc_sample['over3h']</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># # Split data into training and testing sets</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># # Define the parameter grid for SVMGridSearch</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># param_grid = {'C': [0.1, 1, 10], 'gamma': [0.1, 1, 10], 'kernel': ['rbf']}</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># # Fit SVM model using GridSearchCV</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co"># svm = GridSearchCV(SVC(), param_grid, cv=5)</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># svm.fit(X_train.fillna(-999), y_train)</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># # Print the best parameters and accuracy score</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Best parameters:", svm.best_params_)</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Accuracy score:", svm.best_score_)</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># best_svm = grid_search.best_estimator_</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co"># best_svm.fit(X_train, y_train)</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co"># # Make predictions on test data and calculate accuracy</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="co"># y_pred = best_svm.predict(X_test)</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co"># accuracy = accuracy_score(y_test, y_pred)</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Accuracy on test set: {:.2f}%".format(accuracy * 100))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="model-3-attempt" class="level1">
+<h1>Model 3 (attempt)</h1>
+<section id="i-attempted-to-run-a-random-forest-model-but-i-was-sick-the-day-we-went-over-these-in-class-and-while-i-did-a-bit-of-my-own-research-i-could-not-get-it-to-run-how-i-thought-it-would." class="level4">
+<h4 class="anchored" data-anchor-id="i-attempted-to-run-a-random-forest-model-but-i-was-sick-the-day-we-went-over-these-in-class-and-while-i-did-a-bit-of-my-own-research-i-could-not-get-it-to-run-how-i-thought-it-would.">I attempted to run a random forest model, but I was sick the day we went over these in class, and while I did a bit of my own research, I could not get it to run how I thought it would.</h4>
+</section>
+<section id="once-again-utilized-stackoverflow-to-help-build-the-foundation" class="level4">
+<h4 class="anchored" data-anchor-id="once-again-utilized-stackoverflow-to-help-build-the-foundation">Once again utilized StackOverflow to help build the foundation</h4>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import necessary libraries</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.ensemble import RandomForestClassifier</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # Define features and target variable</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># X = nyc[['Borough', 'Complaint Type']]</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># y = nyc['over3h']</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># X.value_counts()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Split data into train and test sets</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # Encode categorical variables </span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># X_train = pd.get_dummies(X_train)</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># X_test = pd.get_dummies(X_test)</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># # Fill missing values with the median</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># X_train = X_train.fillna(X_train.median())</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># X_test = X_test.fillna(X_test.median())</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # Define the random forest model and fit to the training data</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># rf = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># rf.fit(X_train, y_train)</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># # Evaluate the model on the test set</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co"># score = rf.score(X_test, y_test)</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"Mean accuracy: {score:.3f}")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="model-4" class="level1">
+<h1>Model 4</h1>
+<section id="my-last-model-was-a-decision-tree-one-as-i-wanted-to-try-utilizing-different-types-to-see-which-one-i-was-best-at-using-and-of-course-which-one-worked-the-best." class="level4">
+<h4 class="anchored" data-anchor-id="my-last-model-was-a-decision-tree-one-as-i-wanted-to-try-utilizing-different-types-to-see-which-one-i-was-best-at-using-and-of-course-which-one-worked-the-best.">My last model was a Decision Tree one, as I wanted to try utilizing different types to see which one I was best at using, and of course which one worked the best.</h4>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Select relevant columns</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">'Complaint Type'</span>,  <span class="st">'over3h'</span>]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with missing data</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>nyc_tree <span class="op">=</span> nyc[columns].dropna()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> nyc_tree.drop(<span class="st">'over3h'</span> ,axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> nyc_tree[<span class="st">'over3h'</span>]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables to dummy variables</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(X)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and testing sets</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create decision tree model</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>dt.fit(X_train, y_train)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test set and calculate accuracy score</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> dt.predict(X_test)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Decision tree accuracy: </span><span class="sc">{</span>accuracy<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Decision tree accuracy: 0.834</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, classification_report</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the model to make predictions on the test set</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> dt.predict(X_test)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the confusion matrix</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the classification report</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>cr <span class="op">=</span> classification_report(y_test, y_pred)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Confusion Matrix:"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cm)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Classification Report:"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix:
+[[3592    0]
+ [ 715    0]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.83      1.00      0.91      3592
+           1       0.00      0.00      0.00       715
+
+    accuracy                           0.83      4307
+   macro avg       0.42      0.50      0.45      4307
+weighted avg       0.70      0.83      0.76      4307
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+
+/opt/anaconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning:
+
+Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+</code></pre>
+</div>
+</div>
+</section>
+<section id="overall-i-struggled-greatly-with-building-a-model.-while-the-accuracies-hovered-around-.82-for-all-the-working-ones-they-did-not-predict-any-to-be-over3h-and-had-0-precision-and-recall-for-those-scores." class="level4">
+<h4 class="anchored" data-anchor-id="overall-i-struggled-greatly-with-building-a-model.-while-the-accuracies-hovered-around-.82-for-all-the-working-ones-they-did-not-predict-any-to-be-over3h-and-had-0-precision-and-recall-for-those-scores.">Overall, I struggled greatly with building a model. While the accuracies hovered around .82 for all the working ones, they did not predict any to be over3h, and had 0 precision and recall for those scores.</h4>
+</section>
+<section id="maybe-this-is-due-to-my-choice-in-parameters-but-i-did-experiment-a-bit-with-different-ones-and-these-were-the-best-i-could-get." class="level4">
+<h4 class="anchored" data-anchor-id="maybe-this-is-due-to-my-choice-in-parameters-but-i-did-experiment-a-bit-with-different-ones-and-these-were-the-best-i-could-get.">Maybe this is due to my choice in parameters, but I did experiment a bit with different ones, and these were the best I could get.</h4>
+</section>
+<section id="working-with-categorical-data-and-building-these-models-in-general-is-very-difficult-for-me-and-i-know-there-could-be-a-much-more-accurate-model-created.-my-apologies." class="level4">
+<h4 class="anchored" data-anchor-id="working-with-categorical-data-and-building-these-models-in-general-is-very-difficult-for-me-and-i-know-there-could-be-a-much-more-accurate-model-created.-my-apologies.">Working with categorical data, and building these models in general is very difficult for me, and I know there could be a much more accurate model created. My apologies.</h4>
+</section>
+<section id="i-just-wanted-to-include-multiple-models-to-show-the-process-i-went-through." class="level4">
+<h4 class="anchored" data-anchor-id="i-just-wanted-to-include-multiple-models-to-show-the-process-i-went-through.">I just wanted to include multiple models to show the process I went through.</h4>
+</section>
+</section>
+<section id="problem-4" class="level1">
+<h1>Problem 4</h1>
+<section id="after-evaluating-and-playing-around-with-this-data-for-a-bit-i-was-not-sure-what-kind-of-question-i-wanted-answered.-i-decided-to-take-a-look-at-the-complaints-by-each-borough-to-see-if-i-could-find-anything-that-could-catch-my-eye." class="level4">
+<h4 class="anchored" data-anchor-id="after-evaluating-and-playing-around-with-this-data-for-a-bit-i-was-not-sure-what-kind-of-question-i-wanted-answered.-i-decided-to-take-a-look-at-the-complaints-by-each-borough-to-see-if-i-could-find-anything-that-could-catch-my-eye.">After evaluating and playing around with this data for a bit, I was not sure what kind of question I wanted answered. I decided to take a look at the complaints by each borough, to see if I could find anything that could catch my eye.</h4>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create crosstab of Borough and Complaint Type</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>ct <span class="op">=</span> pd.crosstab(nyc[<span class="st">'Borough'</span>], nyc[<span class="st">'Complaint Type'</span>])</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize counts by total number of complaints for each borough</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ct_norm <span class="op">=</span> ct.div(ct.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create heatmap</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(ct_norm, cmap<span class="op">=</span><span class="st">'Blues'</span>, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.2f'</span>, cbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Proportion of Complaint Types by Borough'</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Complaint Type'</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Borough'</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-15-output-1.png" width="953" height="844"></p>
+</div>
+</div>
+</section>
+<section id="that-is-when-it-hit-me.-although-illegal-parking-does-stand-out-in-this-heatmap-the-lightbulb-that-popped-up-in-my-brain-revolved-around-the-age-old-saying-new-york-is-the-city-that-never-sleeps.-i-decided-that-i-wanted-to-see-from-a-statistical-perspective-if-that-is-truly-the-case." class="level4">
+<h4 class="anchored" data-anchor-id="that-is-when-it-hit-me.-although-illegal-parking-does-stand-out-in-this-heatmap-the-lightbulb-that-popped-up-in-my-brain-revolved-around-the-age-old-saying-new-york-is-the-city-that-never-sleeps.-i-decided-that-i-wanted-to-see-from-a-statistical-perspective-if-that-is-truly-the-case.">That is when it hit me. Although illegal parking does stand out in this heatmap, the lightbulb that popped up in my brain revolved around the age old saying “New York is the city that never sleeps”. I decided that I wanted to see, from a statistical perspective, if that is truly the case.</h4>
+</section>
+<section id="i-started-by-viewing-the-medians-for-each-type-of-noise-complaint-along-with-their-duration-as-i-feel-that-corresponds-directly-with-the-idea-that-the-city-is-always-buzzing." class="level4">
+<h4 class="anchored" data-anchor-id="i-started-by-viewing-the-medians-for-each-type-of-noise-complaint-along-with-their-duration-as-i-feel-that-corresponds-directly-with-the-idea-that-the-city-is-always-buzzing.">I started by viewing the medians for each type of noise complaint, along with their duration, as I feel that corresponds directly with the idea that the city is always buzzing.</h4>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select the columns we're interested in</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>noise_s <span class="op">=</span> nyc[[<span class="st">'Complaint Type'</span>, <span class="st">'Borough'</span>, <span class="st">'Duration'</span>]]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to only noise complaints</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>noise_s <span class="op">=</span> noise_s[noise_s[<span class="st">'Complaint Type'</span>] <span class="op">==</span> <span class="st">'Noise - Street/Sidewalk'</span>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># group by borough and get the median duration</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>medians <span class="op">=</span> noise_s.groupby(<span class="st">'Borough'</span>).median()</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the median duration for each borough</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>medians.index, y<span class="op">=</span><span class="st">'Duration'</span>, data<span class="op">=</span>medians)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>&lt;AxesSubplot:xlabel='Borough', ylabel='Duration'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-16-output-2.png" width="585" height="422"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select the columns we're interested in</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>noise_r <span class="op">=</span> nyc[[<span class="st">'Complaint Type'</span>, <span class="st">'Borough'</span>, <span class="st">'Duration'</span>]]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to only noise complaints</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>noise_r <span class="op">=</span> noise_r[noise_r[<span class="st">'Complaint Type'</span>] <span class="op">==</span> <span class="st">'Noise - Residential'</span>]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># group by borough and get the median duration</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>medians <span class="op">=</span> noise_r.groupby(<span class="st">'Borough'</span>).median()</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the median duration for each borough</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>medians.index, y<span class="op">=</span><span class="st">'Duration'</span>, data<span class="op">=</span>medians)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>&lt;AxesSubplot:xlabel='Borough', ylabel='Duration'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-17-output-2.png" width="593" height="422"></p>
+</div>
+</div>
+</section>
+<section id="from-these-graphs-we-can-see-a-bit-about-the-median-durations-but-that-does-not-tell-us-enough.-i-decided-to-try-running-a-hypothesis-test-on-the-times-for-each-type-of-noise-complaint-by-borough-so-see-if-there-was-a-significant-difference-in-the-times-of-noise-complaints-and-other-complaints.-i-wanted-to-see-if-they-are-later-than-others-to-see-what-boroughs-truly-never-sleep." class="level4">
+<h4 class="anchored" data-anchor-id="from-these-graphs-we-can-see-a-bit-about-the-median-durations-but-that-does-not-tell-us-enough.-i-decided-to-try-running-a-hypothesis-test-on-the-times-for-each-type-of-noise-complaint-by-borough-so-see-if-there-was-a-significant-difference-in-the-times-of-noise-complaints-and-other-complaints.-i-wanted-to-see-if-they-are-later-than-others-to-see-what-boroughs-truly-never-sleep.">From these graphs, we can see a bit about the median durations, but that does not tell us enough. I decided to try running a hypothesis test on the times for each type of noise complaint, by borough, so see if there was a significant difference in the times of noise complaints and other complaints. I wanted to see if they are later than others, to see what boroughs truly never sleep.</h4>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> ttest_ind</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> borough <span class="kw">in</span> nyc[<span class="st">'Borough'</span>].unique():</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset data for the current borough and for noise complaints only</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    borough_noise_s <span class="op">=</span> nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (nyc[<span class="st">'Complaint Type'</span>] <span class="op">==</span> <span class="st">'Noise - Street/Sidewalk'</span>)]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset data for the current borough and all other complaints except noise complaints</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    borough_other_s <span class="op">=</span> nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (nyc[<span class="st">'Complaint Type'</span>] <span class="op">!=</span> <span class="st">'Noise - Street/Sidewalk'</span>)]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># conduct t-test for mean difference in Created Date between noise complaints and other complaints</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    t_stat, p_val <span class="op">=</span> ttest_ind(borough_noise_s[<span class="st">'Created Date'</span>].dt.hour, borough_other_s[<span class="st">'Created Date'</span>].dt.hour, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print results for the current borough</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hypothesis test for </span><span class="sc">{</span>borough<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Mean hour for noise complaints: </span><span class="sc">{</span>borough_noise_s[<span class="st">'Created Date'</span>]<span class="sc">.</span>dt<span class="sc">.</span>hour<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Mean hour for other complaints: </span><span class="sc">{</span>borough_other_s[<span class="st">'Created Date'</span>]<span class="sc">.</span>dt<span class="sc">.</span>hour<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"T-statistic: </span><span class="sc">{</span>t_stat<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"P-value: </span><span class="sc">{</span>p_val<span class="sc">:.4f}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hypothesis test for BRONX:
+Mean hour for noise complaints: 15.32
+Mean hour for other complaints: 12.92
+T-statistic: 4.28
+P-value: 0.0000
+
+Hypothesis test for QUEENS:
+Mean hour for noise complaints: 11.11
+Mean hour for other complaints: 13.16
+T-statistic: -2.35
+P-value: 0.0204
+
+Hypothesis test for BROOKLYN:
+Mean hour for noise complaints: 13.28
+Mean hour for other complaints: 13.39
+T-statistic: -0.19
+P-value: 0.8511
+
+Hypothesis test for MANHATTAN:
+Mean hour for noise complaints: 13.84
+Mean hour for other complaints: 13.22
+T-statistic: 1.61
+P-value: 0.1074
+
+Hypothesis test for STATEN ISLAND:
+Mean hour for noise complaints: 12.75
+Mean hour for other complaints: 13.82
+T-statistic: -0.32
+P-value: 0.7555
+
+Hypothesis test for Unspecified:
+Mean hour for noise complaints: 20.50
+Mean hour for other complaints: 16.46
+T-statistic: 6.00
+P-value: 0.0072
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> borough <span class="kw">in</span> nyc[<span class="st">'Borough'</span>].unique():</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset data for the current borough and for noise complaints only</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    borough_noise_r <span class="op">=</span> nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (nyc[<span class="st">'Complaint Type'</span>] <span class="op">==</span> <span class="st">'Noise - Residential'</span>)]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset data for the current borough and all other complaints except noise complaints</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    borough_other_r <span class="op">=</span> nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (nyc[<span class="st">'Complaint Type'</span>] <span class="op">!=</span> <span class="st">'Noise - Residential'</span>)]</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># conduct t-test for mean difference in Created Date between noise complaints and other complaints</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    t_stat, p_val <span class="op">=</span> ttest_ind(borough_noise_r[<span class="st">'Created Date'</span>].dt.hour, borough_other_r[<span class="st">'Created Date'</span>].dt.hour, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print results for the current borough</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hypothesis test for </span><span class="sc">{</span>borough<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Mean hour for noise complaints: </span><span class="sc">{</span>borough_noise_r[<span class="st">'Created Date'</span>]<span class="sc">.</span>dt<span class="sc">.</span>hour<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Mean hour for other complaints: </span><span class="sc">{</span>borough_other_r[<span class="st">'Created Date'</span>]<span class="sc">.</span>dt<span class="sc">.</span>hour<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"T-statistic: </span><span class="sc">{</span>t_stat<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"P-value: </span><span class="sc">{</span>p_val<span class="sc">:.4f}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hypothesis test for BRONX:
+Mean hour for noise complaints: 13.08
+Mean hour for other complaints: 13.01
+T-statistic: 0.28
+P-value: 0.7804
+
+Hypothesis test for QUEENS:
+Mean hour for noise complaints: 12.32
+Mean hour for other complaints: 13.28
+T-statistic: -3.26
+P-value: 0.0011
+
+Hypothesis test for BROOKLYN:
+Mean hour for noise complaints: 13.29
+Mean hour for other complaints: 13.40
+T-statistic: -0.45
+P-value: 0.6517
+
+Hypothesis test for MANHATTAN:
+Mean hour for noise complaints: 12.93
+Mean hour for other complaints: 13.45
+T-statistic: -1.92
+P-value: 0.0546
+
+Hypothesis test for STATEN ISLAND:
+Mean hour for noise complaints: 12.71
+Mean hour for other complaints: 13.95
+T-statistic: -1.17
+P-value: 0.2457
+</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hypothesis test for Unspecified:
+Mean hour for noise complaints: 17.85
+Mean hour for other complaints: 16.27
+T-statistic: 1.39
+P-value: 0.1752
+</code></pre>
+</div>
+</div>
+</section>
+<section id="although-these-tests-are-interesting-they-have-plenty-of-flaws-that-i-did-not-account-for-when-i-came-up-with-the-idea.-first-off-using-means-for-this-type-of-data-military-times-is-not-a-very-bright-idea-as-both-values-such-as-23-and-0-are-considered-late-and-as-a-result-the-data-and-results-become-muddied." class="level4">
+<h4 class="anchored" data-anchor-id="although-these-tests-are-interesting-they-have-plenty-of-flaws-that-i-did-not-account-for-when-i-came-up-with-the-idea.-first-off-using-means-for-this-type-of-data-military-times-is-not-a-very-bright-idea-as-both-values-such-as-23-and-0-are-considered-late-and-as-a-result-the-data-and-results-become-muddied.">Although these tests are interesting, they have plenty of flaws that I did not account for when I came up with the idea. First off, using means for this type of data (military times) is not a very bright idea, as both values such as 23 and 0 are considered late, and as a result, the data and results become muddied.</h4>
+</section>
+<section id="to-go-along-with-that-a-test-for-medians-may-be-more-appropriate-but-once-again-that-may-fail-to-account-for-things-like-this." class="level4">
+<h4 class="anchored" data-anchor-id="to-go-along-with-that-a-test-for-medians-may-be-more-appropriate-but-once-again-that-may-fail-to-account-for-things-like-this.">To go along with that, a test for medians may be more appropriate, but once again that may fail to account for things like this.</h4>
+</section>
+<section id="i-decided-to-take-a-look-at-the-distributions-this-time-so-get-the-clearest-view-of-what-was-going-on." class="level4">
+<h4 class="anchored" data-anchor-id="i-decided-to-take-a-look-at-the-distributions-this-time-so-get-the-clearest-view-of-what-was-going-on.">I decided to take a look at the distributions this time, so get the clearest view of what was going on.</h4>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new column indicating if the complaint type is noise</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Noise - Residential'</span>] <span class="op">=</span> nyc[<span class="st">'Complaint Type'</span>] <span class="op">==</span> <span class="st">'Noise - Residential'</span>  </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the distribution for each borough</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> borough <span class="kw">in</span> nyc[<span class="st">'Borough'</span>].unique():</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot the distribution of created time for noise complaints</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(data<span class="op">=</span>nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (nyc[<span class="st">'Noise - Residential'</span>])][<span class="st">'Created Date'</span>].dt.hour,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                shade<span class="op">=</span><span class="va">True</span>, label<span class="op">=</span><span class="st">'Residential Noise Complaints'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot the distribution of created time for other complaints</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(data<span class="op">=</span>nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (<span class="op">~</span>nyc[<span class="st">'Noise - Residential'</span>])][<span class="st">'Created Date'</span>].dt.hour,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>                shade<span class="op">=</span><span class="va">True</span>, label<span class="op">=</span><span class="st">'Other Complaints'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># set the title and axis labels</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Distribution of Created Time by Complaint Type in </span><span class="sc">{</span>borough<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Hour of the Day"</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add a legend</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show the plot</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-20-output-1.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-20-output-2.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-20-output-3.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-20-output-4.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-20-output-5.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-20-output-6.png" width="821" height="442"></p>
+</div>
+</div>
+</section>
+<section id="from-the-distribution-of-residential-noise-complaints-we-can-see-a-few-things." class="level4">
+<h4 class="anchored" data-anchor-id="from-the-distribution-of-residential-noise-complaints-we-can-see-a-few-things.">From the distribution of residential noise complaints, we can see a few things.</h4>
+</section>
+<section id="in-general-for-these-complaints-there-are-more-filed-around-midnight-to-5-a.m.-showing-there-is-truth-to-the-claim-that-the-city-never-sleeps." class="level4">
+<h4 class="anchored" data-anchor-id="in-general-for-these-complaints-there-are-more-filed-around-midnight-to-5-a.m.-showing-there-is-truth-to-the-claim-that-the-city-never-sleeps.">In general, for these complaints, there are more filed around midnight to 5 A.M., showing there is truth to the claim that the city never sleeps.</h4>
+</section>
+<section id="the-bronx-has-a-massive-amount-of-them-around-the-evening-hours." class="level4">
+<h4 class="anchored" data-anchor-id="the-bronx-has-a-massive-amount-of-them-around-the-evening-hours.">The Bronx has a massive amount of them around the evening hours.</h4>
+</section>
+<section id="queens-is-an-exception-having-a-smaller-distribution-around-the-evening-hours-but-higher-density-around-midnight-and-later.-i-guess-they-dont-start-partying-until-late-in-the-night." class="level4">
+<h4 class="anchored" data-anchor-id="queens-is-an-exception-having-a-smaller-distribution-around-the-evening-hours-but-higher-density-around-midnight-and-later.-i-guess-they-dont-start-partying-until-late-in-the-night.">Queens is an exception, having a smaller distribution around the evening hours, but higher density around midnight and later. I guess they don’t start partying until late in the night.</h4>
+</section>
+<section id="brooklyn-has-a-higher-density-around-midnight-and-the-evening-hours-although-the-differences-are-not-too-large." class="level4">
+<h4 class="anchored" data-anchor-id="brooklyn-has-a-higher-density-around-midnight-and-the-evening-hours-although-the-differences-are-not-too-large.">Brooklyn has a higher density around midnight and the evening hours, although the differences are not too large.</h4>
+</section>
+<section id="manhattan-has-almost-no-difference-in-density-around-the-evening-hours-but-has-a-higher-density-around-midnight.-in-general-i-just-think-manhattan-is-always-bustling-given-the-high-density-for-all-complaints-around-the-evening." class="level4">
+<h4 class="anchored" data-anchor-id="manhattan-has-almost-no-difference-in-density-around-the-evening-hours-but-has-a-higher-density-around-midnight.-in-general-i-just-think-manhattan-is-always-bustling-given-the-high-density-for-all-complaints-around-the-evening.">Manhattan has almost no difference in density around the evening hours, but has a higher density around midnight. In general, I just think Manhattan is always bustling, given the high density for ALL complaints around the evening.</h4>
+</section>
+<section id="staten-island-has-a-higher-density-for-residential-noise-complaints-around-midnight-with-a-lower-density-around-the-evening.-in-general-the-density-for-this-distribution-is-somewhat-constant.-however-the-density-for-all-complaints-is-very-high-in-the-evening-hours-which-caught-me-off-guard.-even-if-they-arent-partying-i-guess-even-they-dont-sleep." class="level4">
+<h4 class="anchored" data-anchor-id="staten-island-has-a-higher-density-for-residential-noise-complaints-around-midnight-with-a-lower-density-around-the-evening.-in-general-the-density-for-this-distribution-is-somewhat-constant.-however-the-density-for-all-complaints-is-very-high-in-the-evening-hours-which-caught-me-off-guard.-even-if-they-arent-partying-i-guess-even-they-dont-sleep.">Staten Island has a higher density for residential noise complaints around midnight, with a lower density around the evening. In general, the density for this distribution is somewhat constant. However, the density for all complaints is very high in the evening hours, which caught me off guard. Even if they aren’t partying, I guess even they don’t sleep.</h4>
+</section>
+<section id="the-unspecified-resiential-noise-complaints-follow-a-very-similar-distribution-as-that-of-other-complaints-giving-us-little-to-work-with." class="level4">
+<h4 class="anchored" data-anchor-id="the-unspecified-resiential-noise-complaints-follow-a-very-similar-distribution-as-that-of-other-complaints-giving-us-little-to-work-with.">The unspecified resiential noise complaints follow a very similar distribution as that of other complaints, giving us little to work with.</h4>
+</section>
+<section id="now-we-will-take-a-gander-at-the-street-noise-complaints." class="level3">
+<h3 class="anchored" data-anchor-id="now-we-will-take-a-gander-at-the-street-noise-complaints.">Now we will take a gander at the street noise complaints.</h3>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nyc[<span class="st">'Noise - Street'</span>] <span class="op">=</span> nyc[<span class="st">'Complaint Type'</span>] <span class="op">==</span> <span class="st">'Noise - Street/Sidewalk'</span>  </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> borough <span class="kw">in</span> nyc[<span class="st">'Borough'</span>].unique():</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(data<span class="op">=</span>nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (nyc[<span class="st">'Noise - Street'</span>])][<span class="st">'Created Date'</span>].dt.hour,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                shade<span class="op">=</span><span class="va">True</span>, label<span class="op">=</span><span class="st">'Street Noise Complaints'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(data<span class="op">=</span>nyc[(nyc[<span class="st">'Borough'</span>] <span class="op">==</span> borough) <span class="op">&amp;</span> (<span class="op">~</span>nyc[<span class="st">'Noise - Street'</span>])][<span class="st">'Created Date'</span>].dt.hour,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>                shade<span class="op">=</span><span class="va">True</span>, label<span class="op">=</span><span class="st">'Other Complaints'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Distribution of Created Time by Complaint Type in </span><span class="sc">{</span>borough<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Hour of the Day"</span>)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-21-output-1.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-21-output-2.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-21-output-3.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-21-output-4.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-21-output-5.png" width="821" height="442"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="midterm_files/figure-html/cell-21-output-6.png" width="812" height="442"></p>
+</div>
+</div>
+<section id="the-data-we-see-here-is-very-sinmilar-but-there-are-some-observations-to-be-made." class="level4">
+<h4 class="anchored" data-anchor-id="the-data-we-see-here-is-very-sinmilar-but-there-are-some-observations-to-be-made.">The data we see here is very sinmilar, but there are some observations to be made.</h4>
+</section>
+<section id="the-bronx-has-a-lower-density-for-these-noise-complaints-around-midnight-but-still-a-high-density-around-the-evening.-maybe-this-contrasted-with-the-high-density-for-residential-noise-complaints-around-midnight-suggests-people-begin-going-home-earlier-in-the-bronx-but-still-keep-the-party-going." class="level4">
+<h4 class="anchored" data-anchor-id="the-bronx-has-a-lower-density-for-these-noise-complaints-around-midnight-but-still-a-high-density-around-the-evening.-maybe-this-contrasted-with-the-high-density-for-residential-noise-complaints-around-midnight-suggests-people-begin-going-home-earlier-in-the-bronx-but-still-keep-the-party-going.">The Bronx has a lower density for these noise complaints around midnight, but still a high density around the evening. Maybe this contrasted with the high density for residential noise complaints around midnight suggests people begin going home earlier in the Bronx, but still keep the party going.</h4>
+</section>
+<section id="queens-still-has-a-higher-density-around-midnight-but-now-there-is-a-lower-density-in-the-evening-hours.-people-just-are-not-out-and-about-being-loud-during-that-time." class="level4">
+<h4 class="anchored" data-anchor-id="queens-still-has-a-higher-density-around-midnight-but-now-there-is-a-lower-density-in-the-evening-hours.-people-just-are-not-out-and-about-being-loud-during-that-time.">Queens still has a higher density around midnight, but now there is a lower density in the evening hours. People just are not out and about being loud during that time.</h4>
+</section>
+<section id="brooklyn-now-has-an-almost-identical-density-between-the-two-distributions-noise-street-and-other-in-the-evening-with-a-slightly-higher-density-around-midnight.-there-may-be-no-significant-difference-here." class="level4">
+<h4 class="anchored" data-anchor-id="brooklyn-now-has-an-almost-identical-density-between-the-two-distributions-noise-street-and-other-in-the-evening-with-a-slightly-higher-density-around-midnight.-there-may-be-no-significant-difference-here.">Brooklyn now has an almost identical density between the two distributions (noise-street and other) in the evening, with a slightly higher density around midnight. There may be no significant difference here.</h4>
+</section>
+<section id="manhattan-once-again-has-a-high-density-for-both-distributions-overall-during-the-times-of-interest-but-now-the-density-around-midnight-is-a-bit-lower-for-street-noise-complaints." class="level4">
+<h4 class="anchored" data-anchor-id="manhattan-once-again-has-a-high-density-for-both-distributions-overall-during-the-times-of-interest-but-now-the-density-around-midnight-is-a-bit-lower-for-street-noise-complaints.">Manhattan once again has a high density for both distributions overall during the times of interest, but now the density around midnight is a bit lower for street noise complaints.</h4>
+</section>
+<section id="staten-island-has-a-very-similar-graph-to-the-first-one-although-now-they-have-slightly-lower-densities-around-the-hours-of-interest." class="level4">
+<h4 class="anchored" data-anchor-id="staten-island-has-a-very-similar-graph-to-the-first-one-although-now-they-have-slightly-lower-densities-around-the-hours-of-interest.">Staten Island has a very similar graph to the first one, although now they have slightly lower densities around the hours of interest.</h4>
+</section>
+</section>
+<section id="final-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="final-takeaways">Final Takeaways</h2>
+<section id="obviously-there-are-flaws-with-the-way-i-went-about-doing-these-things." class="level4">
+<h4 class="anchored" data-anchor-id="obviously-there-are-flaws-with-the-way-i-went-about-doing-these-things.">Obviously, there are flaws with the way I went about doing these things.</h4>
+</section>
+<section id="to-begin-with-the-higher-density-for-certain-times-with-noise-complaints-could-easily-just-be-explained-by-the-fact-that-noise-complaints-are-much-more-likely-to-be-filed-when-people-are-trying-to-sleep-rather-than-during-the-day." class="level4">
+<h4 class="anchored" data-anchor-id="to-begin-with-the-higher-density-for-certain-times-with-noise-complaints-could-easily-just-be-explained-by-the-fact-that-noise-complaints-are-much-more-likely-to-be-filed-when-people-are-trying-to-sleep-rather-than-during-the-day.">To begin with, the higher density for certain times with noise complaints could easily just be explained by the fact that noise complaints are much more likely to be filed when people are trying to sleep rather than during the day.</h4>
+</section>
+<section id="to-go-along-with-that-the-quantity-of-noise-complaints-can-also-just-come-from-the-high-population-in-these-areas." class="level4">
+<h4 class="anchored" data-anchor-id="to-go-along-with-that-the-quantity-of-noise-complaints-can-also-just-come-from-the-high-population-in-these-areas.">To go along with that, the quantity of noise complaints can also just come from the high population in these areas.</h4>
+</section>
+<section id="there-are-also-many-things-i-did-not-account-for-such-as-my-data-not-being-cleaned-properly-im-not-very-good-at-cleaning-and-unspecified-values-belonging-to-certain-boroughs-potentially-skewing-the-data." class="level4">
+<h4 class="anchored" data-anchor-id="there-are-also-many-things-i-did-not-account-for-such-as-my-data-not-being-cleaned-properly-im-not-very-good-at-cleaning-and-unspecified-values-belonging-to-certain-boroughs-potentially-skewing-the-data.">There are also many things I did not account for, such as my data not being cleaned properly (I’m not very good at cleaning) and Unspecified values belonging to certain boroughs, potentially skewing the data.</h4>
+</section>
+<section id="however-i-still-came-away-with-some-takeaways." class="level4">
+<h4 class="anchored" data-anchor-id="however-i-still-came-away-with-some-takeaways.">However, I still came away with some takeaways.</h4>
+</section>
+<section id="the-high-density-of-noise-complaints-in-certain-times-as-well-as-how-many-noise-complaints-make-up-the-total-complaints-filed-in-nyc-during-this-time-period-show-me-there-is-at-least-something-there.-there-is-something-worth-exploring-further-and-someone-could-easily-build-off-my-idea-which-other-people-likely-already-have-and-gain-insight." class="level4">
+<h4 class="anchored" data-anchor-id="the-high-density-of-noise-complaints-in-certain-times-as-well-as-how-many-noise-complaints-make-up-the-total-complaints-filed-in-nyc-during-this-time-period-show-me-there-is-at-least-something-there.-there-is-something-worth-exploring-further-and-someone-could-easily-build-off-my-idea-which-other-people-likely-already-have-and-gain-insight.">The high density of noise complaints in certain times, as well as how many noise complaints make up the total complaints filed in NYC during this time period show me there is at least something there. There is something worth exploring further, and someone could easily build off my idea (which other people likely already have) and gain insight.</h4>
+</section>
+<section id="overall-while-this-may-have-started-from-a-joke-my-roommate-made-about-proving-new-york-never-sleeps-i-did-in-the-end-enjoy-the-process-i-went-through-as-well-as-visualizing-the-data-in-this-manner.-im-not-very-good-at-coding-at-all-and-it-does-confuse-me-and-stress-me-out-at-times-but-with-this-little-question-i-can-genuinely-say-i-got-a-lot-out-of-it." class="level4">
+<h4 class="anchored" data-anchor-id="overall-while-this-may-have-started-from-a-joke-my-roommate-made-about-proving-new-york-never-sleeps-i-did-in-the-end-enjoy-the-process-i-went-through-as-well-as-visualizing-the-data-in-this-manner.-im-not-very-good-at-coding-at-all-and-it-does-confuse-me-and-stress-me-out-at-times-but-with-this-little-question-i-can-genuinely-say-i-got-a-lot-out-of-it.">Overall, while this may have started from a joke my roommate made about ‘proving New York never sleeps’, I did in the end enjoy the process I went through, as well as visualizing the data in this manner. I’m not very good at coding at all, and it does confuse me and stress me out at times, but with this little question I can genuinely say I got a lot out of it.</h4>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

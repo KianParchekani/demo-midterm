@@ -1,0 +1,538 @@
+---
+title: "Midterm Project"
+author: "Kian Parchekani"
+date: "February 28, 2023"
+format:
+  html:
+    code-fold: true
+  pdf: 
+    geometry: 
+      - top=30mm
+      - left=20mm
+jupyter: python3
+---
+#### Importing Modules
+```{python}
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.stats import ttest_ind
+nyc = pd.read_csv('nyc311_011523-012123_by022023.csv')
+```
+# Problem 1
+#### To start off, we have to clean the data a bit.
+```{python}
+
+nyc['Created Date'] = pd.to_datetime(nyc['Created Date'])
+nyc['Closed Date'] = pd.to_datetime(nyc['Closed Date'])
+
+# find rows where Created Date is later than Closed Date
+mask = nyc['Created Date'] > nyc['Closed Date']
+
+# replace values in those rows by swapping the two dates
+nyc.loc[mask, ['Created Date', 'Closed Date']] = nyc.loc[mask, ['Closed Date', 'Created Date']]
+
+# convert all values in the Location Type column to lowercase
+nyc['Location Type'] = nyc['Location Type'].str.lower()
+
+# define the bounds of NYC
+nyc_lat_bounds = (40.4774, 40.9176)
+nyc_lon_bounds = (-74.2591, -73.7002)
+
+# create a mask to identify rows where latitude or longitude is outside NYC bounds
+mask = (nyc['Latitude'] < nyc_lat_bounds[0]) | (nyc['Latitude'] > nyc_lat_bounds[1]) | \
+       (nyc['Longitude'] < nyc_lon_bounds[0]) | (nyc['Longitude'] > nyc_lon_bounds[1])
+
+# drop the rows that are outside the NYC bounds
+nyc = nyc[~mask]
+
+# format the Incident Zip column to be 5 digits long
+nyc['Incident Zip'] = nyc['Incident Zip'].astype(str)
+nyc['Incident Zip'] = nyc['Incident Zip'].str[:5]
+
+nyc.head(10)
+```
+#### This may not be clean enough, but a lot of geocoding I was unable to get to run correctly without ruining some of my other code, so this is all I included.
+#### If I had the ability to do so, I would go back and remove entries without valid zip codes, but I felt that the latitude and longitude bounds should do the trick (geocoding is not my forte, as displayed by my homeworks)
+# Problem 2
+
+#### We begin by filtering the data to only NYC requests 
+#### Then we create the duration varaible, along with the Weekend variable
+#### Now, let's plot this.
+```{python}
+nyc = nyc[nyc['Agency'] == 'NYPD']
+
+# create a new variable "Duration", which represents the time period from the "Created Date" to "Closed Date"
+nyc['Duration'] = (nyc['Closed Date'] - nyc['Created Date']).dt.total_seconds() / 60  # in minutes
+
+# visualize the distribution of "Duration" by weekdays/weekend and by "Borough"
+nyc['Weekday'] = nyc['Created Date'].dt.day_name()
+nyc['Weekend'] = np.where(nyc['Weekday'].isin(['Saturday', 'Sunday']), 'Weekend', 'Weekday')
+
+sns.boxplot(x='Weekend', y='Duration', data=nyc)
+plt.title('Distribution of Duration by Weekdays/Weekend')
+plt.xlabel('Day')
+plt.show()
+
+sns.boxplot(x='Borough', y='Duration', data=nyc)
+plt.title('Distribution of Duration by Borough')
+plt.xticks(rotation=90)
+plt.show()
+
+```
+
+#### Now we run a hypothesis test to see whether there is a significant difference in duration for complaints filed over the weekend vs. during the week.
+```{python}
+print('Null hypothesis (for each borough): There is no difference in duration for the weekend')
+print('Alt. Hypothesis: There is some difference in duration for the weekend')
+weekday_dur = nyc[nyc['Weekend'] == 'Weekday']
+weekend_dur = nyc[nyc['Weekend'] == 'Weekend']
+
+for borough in nyc['Borough'].unique():
+    borough_weekday_dur = weekday_dur[weekday_dur['Borough'] == borough]['Duration']
+    borough_weekend_dur = weekend_dur[weekend_dur['Borough'] == borough]['Duration']
+    print(f"Duration distribution for {borough}:")
+    print(f"\tWeekday mean: {np.mean(borough_weekday_dur):.2f}")
+    print(f"\tWeekend mean: {np.mean(borough_weekend_dur):.2f}")
+    t_stat, p_val = ttest_ind(borough_weekday_dur.dropna(), borough_weekend_dur.dropna())
+    print(f"\tT-statistic: {t_stat:.2f}, p-value: {p_val:.4f}\n")
+print('According to our results, the p-values indicate that we reject the null hypothesis for Queens, Staten Island and Manhattan, but we fail to reject for Brooklyn and the Bronx, based on our evidence')
+
+```
+
+# Problem 3
+
+#### First, we create the over3h variable.
+```{python}
+#Define over3h
+nyc['over3h'] = (nyc['Duration'] > 180).astype(int)
+#nyc['over3h']
+```
+#### Now, we import useful modules
+```{python}
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import roc_auc_score
+
+```
+# Model 1
+
+#### My first model was a basic SVM one, using parameters I saw fit to use. However, as I have found in the past, what I believe to be useful parameters are often categorical, so I have to do my best to account for this.
+```{python}
+# Select the columns of interest
+X = nyc[["Location Type", "Complaint Type", "Weekend","Borough"]]
+y = nyc["over3h"]
+
+# Encode categorical features as numerical values
+le = LabelEncoder()
+X["Complaint Type"] = le.fit_transform(X["Complaint Type"])
+
+X["Location Type"] = le.fit_transform(X["Location Type"])
+
+X["Weekend"] = le.fit_transform(X["Weekend"])
+
+X["Borough"] = le.fit_transform(X["Borough"])
+
+
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Scale the features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Train the SVM model
+svm = SVC(kernel="rbf")
+svm.fit(X_train, y_train)
+
+# Predict the test set labels
+y_pred = svm.predict(X_test)
+
+# Evaluate the performance of the SVM model
+print(f"Accuracy: {accuracy_score(y_test, y_pred)}")
+print(classification_report(y_test, y_pred))
+
+# Calculate the AUC score
+auc_score = roc_auc_score(y_test, y_pred)
+print(f"AUC Score: {auc_score}")
+```
+
+# Model 2
+
+#### This model was done a bit differently. I utilized help from StackOverlfow, my roomates, and the answers to previous homeworks to see if I could get a better SVM model.
+#### I have some commented out code below this that shows my attempts to use a Grid Search to optimize my model, but I still cannot get them to work efficiently, as they run forever no matter how small of a sample size I give. 
+```{python}
+nyc['Date String'] = nyc['Created Date'].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+# test data is the week of Jan. 22
+test = nyc[nyc["Date String"].str.contains('01/22/2023|01/23/2023|01/24/2023|01/25/2023|01/26/2023|01/27/2023|01/28/2023')]
+# training data is everything else
+
+
+# test data is a random sample of 200 incidents
+test_svm = nyc.sample(n=200, random_state=1)
+# training data is a random sample of 800 incidents
+train_svm = nyc.drop(test.index).sample(n=800, random_state=1)
+# select the parameters to be included in the fit 
+train_focus_data_svm = train_svm[['Complaint Type', 'Location Type', 'over3h']]
+
+# transform categorical data
+le = LabelEncoder()
+train_focus_data_svm["Complaint Type"] = le.fit_transform(train_focus_data_svm["Complaint Type"])
+
+train_focus_data_svm["Location Type"] = le.fit_transform(train_focus_data_svm["Location Type"])
+
+# drop NaN rows 
+training_svm = train_focus_data_svm.dropna()
+# select the parameters to be included in the testing
+
+test_focus_data_svm = test_svm[['Complaint Type', 'Location Type', 'over3h']]
+
+test_focus_data_svm["Complaint Type"] = le.fit_transform(test_focus_data_svm["Complaint Type"])
+
+test_focus_data_svm["Location Type"] = le.fit_transform(test_focus_data_svm["Location Type"])
+
+testing_svm = test_focus_data_svm.dropna()
+# y training and testing
+y_train_svm = training_svm['over3h'].values
+y_test_svm = testing_svm['over3h'].values
+# X training and testing
+X_train_svm = training_svm.drop(labels=['over3h'], axis=1)
+X_test_svm = testing_svm.drop(labels=['over3h'], axis=1)
+
+# Scale the features
+scaler = StandardScaler()
+X_train_svm = scaler.fit_transform(X_train_svm)
+X_test_svm = scaler.transform(X_test_svm)
+
+# Train the SVM model
+svm = SVC(kernel="rbf")
+svm.fit(X_train_svm, y_train_svm)
+
+# Predict the test set labels
+y_pred = svm.predict(X_test_svm)
+
+# Evaluate the performance of the SVM model
+print(f"Accuracy: {accuracy_score(y_test_svm, y_pred)}")
+print(classification_report(y_test_svm, y_pred))
+
+# Calculate the AUC score
+auc_score = roc_auc_score(y_test_svm, y_pred)
+print(f"AUC Score: {auc_score}")
+
+```
+```{python}
+# from sklearn.preprocessing import LabelEncoder
+
+# from sklearn.model_selection import GridSearchCV
+
+# # Sample 10 (or smaller if it doesn't run)% of the data for grid search
+# nyc_sample = nyc.sample(frac=0.01, random_state=42)
+
+# # Convert categorical columns to numeric using LabelEncoder
+# le = LabelEncoder()
+# for col in nyc_sample.select_dtypes(include=['object']):
+#     nyc_sample[col] = le.fit_transform(nyc_sample[col].astype(str))
+
+# # Split data into X and y
+# X = nyc_sample.drop(['over3h', 'Created Date', 'Closed Date', 'Duration'], axis=1)
+# y = nyc_sample['over3h']
+
+# # Split data into training and testing sets
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# # Define the parameter grid for SVMGridSearch
+# param_grid = {'C': [0.1, 1, 10], 'gamma': [0.1, 1, 10], 'kernel': ['rbf']}
+
+# # Fit SVM model using GridSearchCV
+# svm = GridSearchCV(SVC(), param_grid, cv=5)
+# svm.fit(X_train.fillna(-999), y_train)
+
+# # Print the best parameters and accuracy score
+# print("Best parameters:", svm.best_params_)
+# print("Accuracy score:", svm.best_score_)
+
+# best_svm = grid_search.best_estimator_
+# best_svm.fit(X_train, y_train)
+
+# # Make predictions on test data and calculate accuracy
+# y_pred = best_svm.predict(X_test)
+# accuracy = accuracy_score(y_test, y_pred)
+# print("Accuracy on test set: {:.2f}%".format(accuracy * 100))
+
+```
+
+# Model 3 (attempt)
+
+#### I attempted to run a random forest model, but I was sick the day we went over these in class, and while I did a bit of my own research, I could not get it to run how I thought it would. 
+#### Once again utilized StackOverflow to help build the foundation
+```{python}
+# Import necessary libraries
+# from sklearn.ensemble import RandomForestClassifier
+
+# # Define features and target variable
+# X = nyc[['Borough', 'Complaint Type']]
+# y = nyc['over3h']
+# X.value_counts()
+
+
+
+```
+
+```{python}
+# # Split data into train and test sets
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# # Encode categorical variables 
+
+# X_train = pd.get_dummies(X_train)
+# X_test = pd.get_dummies(X_test)
+
+# # Fill missing values with the median
+# X_train = X_train.fillna(X_train.median())
+# X_test = X_test.fillna(X_test.median())
+
+# # Define the random forest model and fit to the training data
+# rf = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
+# rf.fit(X_train, y_train)
+
+# # Evaluate the model on the test set
+# score = rf.score(X_test, y_test)
+# print(f"Mean accuracy: {score:.3f}")
+```
+
+# Model 4
+
+#### My last model was a Decision Tree one, as I wanted to try utilizing different types to see which one I was best at using, and of course which one worked the best.
+
+```{python}
+from sklearn.tree import DecisionTreeClassifier
+
+# Select relevant columns
+columns = ['Complaint Type',  'over3h']
+
+# Drop rows with missing data
+nyc_tree = nyc[columns].dropna()
+
+# Split data into features and target
+X = nyc_tree.drop('over3h' ,axis=1)
+y = nyc_tree['over3h']
+
+# Convert categorical variables to dummy variables
+X = pd.get_dummies(X)
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create decision tree model
+dt = DecisionTreeClassifier(max_depth=5, random_state=42)
+dt.fit(X_train, y_train)
+
+# Predict on test set and calculate accuracy score
+y_pred = dt.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Decision tree accuracy: {accuracy:.3f}")
+```
+
+```{python}
+from sklearn.metrics import confusion_matrix, classification_report
+
+# Use the model to make predictions on the test set
+y_pred = dt.predict(X_test)
+
+# Create the confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Create the classification report
+cr = classification_report(y_test, y_pred)
+
+print("Confusion Matrix:")
+print(cm)
+print("\nClassification Report:")
+print(cr)
+
+```
+#### Overall, I struggled greatly with building a model. While the accuracies hovered around .82 for all the working ones, they did not predict any to be over3h, and had 0 precision and recall for those scores. 
+#### Maybe this is due to my choice in parameters, but I did experiment a bit with different ones, and these were the best I could get.
+#### Working with categorical data, and building these models in general is very difficult for me, and I know there could be a much more accurate model created. My apologies.
+#### I just wanted to include multiple models to show the process I went through.
+
+# Problem 4
+#### After evaluating and playing around with this data for a bit, I was not sure what kind of question I wanted answered. I decided to take a look at the complaints by each borough, to see if I could find anything that could catch my eye.
+```{python}
+import seaborn as sns
+
+# Create crosstab of Borough and Complaint Type
+ct = pd.crosstab(nyc['Borough'], nyc['Complaint Type'])
+
+# Normalize counts by total number of complaints for each borough
+ct_norm = ct.div(ct.sum(axis=1), axis=0)
+
+# Create heatmap
+plt.figure(figsize=(12, 8))
+sns.heatmap(ct_norm, cmap='Blues', annot=True, fmt='.2f', cbar=False)
+plt.title('Proportion of Complaint Types by Borough')
+plt.xlabel('Complaint Type')
+plt.ylabel('Borough')
+plt.show()
+
+```
+#### That is when it hit me. Although illegal parking does stand out in this heatmap, the lightbulb that popped up in my brain revolved around the age old saying "New York is the city that never sleeps". I decided that I wanted to see, from a statistical perspective, if that is truly the case.
+#### I started by viewing the medians for each type of noise complaint, along with their duration, as I feel that corresponds directly with the idea that the city is always buzzing.
+```{python}
+# select the columns we're interested in
+noise_s = nyc[['Complaint Type', 'Borough', 'Duration']]
+
+# filter to only noise complaints
+noise_s = noise_s[noise_s['Complaint Type'] == 'Noise - Street/Sidewalk']
+
+# group by borough and get the median duration
+medians = noise_s.groupby('Borough').median()
+
+# plot the median duration for each borough
+sns.barplot(x=medians.index, y='Duration', data=medians)
+
+```
+
+```{python}
+# select the columns we're interested in
+noise_r = nyc[['Complaint Type', 'Borough', 'Duration']]
+
+# filter to only noise complaints
+noise_r = noise_r[noise_r['Complaint Type'] == 'Noise - Residential']
+
+# group by borough and get the median duration
+medians = noise_r.groupby('Borough').median()
+
+# plot the median duration for each borough
+sns.barplot(x=medians.index, y='Duration', data=medians)
+```
+#### From these graphs, we can see a bit about the median durations, but that does not tell us enough. I decided to try running a hypothesis test on the times for each type of noise complaint, by borough, so see if there was a significant difference in the times of noise complaints and other complaints. I wanted to see if they are later than others, to see what boroughs truly never sleep.
+```{python}
+from scipy.stats import ttest_ind
+
+for borough in nyc['Borough'].unique():
+    # subset data for the current borough and for noise complaints only
+    borough_noise_s = nyc[(nyc['Borough'] == borough) & (nyc['Complaint Type'] == 'Noise - Street/Sidewalk')]
+    # subset data for the current borough and all other complaints except noise complaints
+    borough_other_s = nyc[(nyc['Borough'] == borough) & (nyc['Complaint Type'] != 'Noise - Street/Sidewalk')]
+    
+    # conduct t-test for mean difference in Created Date between noise complaints and other complaints
+    t_stat, p_val = ttest_ind(borough_noise_s['Created Date'].dt.hour, borough_other_s['Created Date'].dt.hour, equal_var=False)
+    
+    # print results for the current borough
+    print(f"Hypothesis test for {borough}:")
+    print(f"Mean hour for noise complaints: {borough_noise_s['Created Date'].dt.hour.mean():.2f}")
+    print(f"Mean hour for other complaints: {borough_other_s['Created Date'].dt.hour.mean():.2f}")
+    print(f"T-statistic: {t_stat:.2f}")
+    print(f"P-value: {p_val:.4f}\n")
+
+
+```
+
+```{python}
+for borough in nyc['Borough'].unique():
+    # subset data for the current borough and for noise complaints only
+    borough_noise_r = nyc[(nyc['Borough'] == borough) & (nyc['Complaint Type'] == 'Noise - Residential')]
+    # subset data for the current borough and all other complaints except noise complaints
+    borough_other_r = nyc[(nyc['Borough'] == borough) & (nyc['Complaint Type'] != 'Noise - Residential')]
+    
+    # conduct t-test for mean difference in Created Date between noise complaints and other complaints
+    t_stat, p_val = ttest_ind(borough_noise_r['Created Date'].dt.hour, borough_other_r['Created Date'].dt.hour, equal_var=False)
+    
+    # print results for the current borough
+    print(f"Hypothesis test for {borough}:")
+    print(f"Mean hour for noise complaints: {borough_noise_r['Created Date'].dt.hour.mean():.2f}")
+    print(f"Mean hour for other complaints: {borough_other_r['Created Date'].dt.hour.mean():.2f}")
+    print(f"T-statistic: {t_stat:.2f}")
+    print(f"P-value: {p_val:.4f}\n")
+```
+#### Although these tests are interesting, they have plenty of flaws that I did not account for when I came up with the idea. First off, using means for this type of data (military times) is not a very bright idea, as both values such as 23 and 0 are considered late, and as a result, the data and results become muddied. 
+#### To go along with that, a test for medians may be more appropriate, but once again that may fail to account for things like this.
+#### I decided to take a look at the distributions this time, so get the clearest view of what was going on.
+```{python}
+
+# create a new column indicating if the complaint type is noise
+nyc['Noise - Residential'] = nyc['Complaint Type'] == 'Noise - Residential'  
+
+# plot the distribution for each borough
+for borough in nyc['Borough'].unique():
+    fig, ax = plt.subplots(figsize=(10, 5))
+    
+    # plot the distribution of created time for noise complaints
+    sns.kdeplot(data=nyc[(nyc['Borough'] == borough) & (nyc['Noise - Residential'])]['Created Date'].dt.hour,
+                shade=True, label='Residential Noise Complaints', ax=ax)
+    
+    # plot the distribution of created time for other complaints
+    sns.kdeplot(data=nyc[(nyc['Borough'] == borough) & (~nyc['Noise - Residential'])]['Created Date'].dt.hour,
+                shade=True, label='Other Complaints', ax=ax)
+    
+    # set the title and axis labels
+    ax.set_title(f"Distribution of Created Time by Complaint Type in {borough}")
+    ax.set_xlabel("Hour of the Day")
+    ax.set_ylabel("Density")
+    
+    # add a legend
+    ax.legend()
+    
+    # show the plot
+    plt.show()
+
+```
+#### From the distribution of residential noise complaints, we can see a few things.
+#### In general, for these complaints, there are more filed around midnight to 5 A.M., showing there is truth to the claim that the city never sleeps.
+#### The Bronx has a massive amount of them around the evening hours.
+#### Queens is an exception, having a smaller distribution around the evening hours, but higher density around midnight and later. I guess they don't start partying until late in the night.
+#### Brooklyn has a higher density around midnight and the evening hours, although the differences are not too large.
+#### Manhattan has almost no difference in density around the evening hours, but has a higher density around midnight. In general, I just think Manhattan is always bustling, given the high density for ALL complaints around the evening.
+#### Staten Island has a higher density for residential noise complaints around midnight, with a lower density around the evening. In general, the density for this distribution is somewhat constant. However, the density for all complaints is very high in the evening hours, which caught me off guard. Even if they aren't partying, I guess even they don't sleep.
+#### The unspecified resiential noise complaints follow a very similar distribution as that of other complaints, giving us little to work with.
+
+### Now we will take a gander at the street noise complaints.
+```{python}
+
+nyc['Noise - Street'] = nyc['Complaint Type'] == 'Noise - Street/Sidewalk'  
+
+for borough in nyc['Borough'].unique():
+    fig, ax = plt.subplots(figsize=(10, 5))
+    
+    
+    sns.kdeplot(data=nyc[(nyc['Borough'] == borough) & (nyc['Noise - Street'])]['Created Date'].dt.hour,
+                shade=True, label='Street Noise Complaints', ax=ax)
+    
+    
+    sns.kdeplot(data=nyc[(nyc['Borough'] == borough) & (~nyc['Noise - Street'])]['Created Date'].dt.hour,
+                shade=True, label='Other Complaints', ax=ax)
+    
+    
+    ax.set_title(f"Distribution of Created Time by Complaint Type in {borough}")
+    ax.set_xlabel("Hour of the Day")
+    ax.set_ylabel("Density")
+    
+    
+    ax.legend()
+    
+    
+    plt.show()
+
+```
+#### The data we see here is very sinmilar, but there are some observations to be made.
+#### The Bronx has a lower density for these noise complaints around midnight, but still a high density around the evening. Maybe this contrasted with the high density for residential noise complaints around midnight suggests people begin going home earlier in the Bronx, but still keep the party going.
+#### Queens still has a higher density around midnight, but now there is a lower density in the evening hours. People just are not out and about being loud during that time.
+#### Brooklyn now has an almost identical density between the two distributions (noise-street and other) in the evening, with a slightly higher density around midnight. There may be no significant difference here.
+#### Manhattan once again has a high density for both distributions overall during the times of interest, but now the density around midnight is a bit lower for street noise complaints. 
+#### Staten Island has a very similar graph to the first one, although now they have slightly lower densities around the hours of interest.
+
+## Final Takeaways
+#### Obviously, there are flaws with the way I went about doing these things.
+#### To begin with, the higher density for certain times with noise complaints could easily just be explained by the fact that noise complaints are much more likely to be filed when people are trying to sleep rather than during the day. 
+#### To go along with that, the quantity of noise complaints can also just come from the high population in these areas. 
+#### There are also many things I did not account for, such as my data not being cleaned properly (I'm not very good at cleaning) and Unspecified values belonging to certain boroughs, potentially skewing the data.
+#### However, I still came away with some takeaways.
+#### The high density of noise complaints in certain times, as well as how many noise complaints make up the total complaints filed in NYC during this time period show me there is at least something there. There is something worth exploring further, and someone could easily build off my idea (which other people likely already have) and gain insight.
+#### Overall, while this may have started from a joke my roommate made about 'proving New York never sleeps', I did in the end enjoy the process I went through, as well as visualizing the data in this manner. I'm not very good at coding at all, and it does confuse me and stress me out at times, but with this little question I can genuinely say I got a lot out of it.
